@@ -1,0 +1,39 @@
+{
+  "name": "sequelize-db-export-import",
+  "version": "0.0.1",
+  "description": "Generater models from mysql db or import tables from models files",
+  "main": "index",
+  "bin": {
+    "seq-ei": "./bin/www"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "node",
+    "sequelize",
+    "mysql",
+    "link",
+    "auto",
+    "models",
+    "orm",
+    "coffee"
+  ],
+  "repository": {
+    "type": "git"
+  },
+  "bugs": {
+    "url": ""
+  },
+  "author": "Boia Wang <zhengwang2314@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.6.0",
+    "lodash": "^2.4.1",
+    "q": "^1.1.2",
+    "sequelize": "^2.0.0-rc8"
+  },
+  "devDependencies": {
+    "mysql": "^2.5.4"
+  }
+}
