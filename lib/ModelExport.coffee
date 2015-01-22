@@ -3,6 +3,7 @@ Q = require('q')
 fs = require('fs')
 path = require('path')
 _ = require('lodash')
+types = require('../config/datatypes').types
 
 module.exports = (() ->
 
@@ -69,7 +70,7 @@ module.exports = (() ->
       else if type is 'js'
         text += "module.exports = function(sequelize, DataTypes) {\n&return sequelize.define(\'#{data.modelName}\', {\n"
   
-      # 生成模型 &代表空格，默认两个
+      # 生成模型 &代表空格，默认两个空格
       _.each data.fields, (field, key) ->
 
         if type is 'coffee'
@@ -81,7 +82,19 @@ module.exports = (() ->
           if not _.isNull(value)
 
             if attr is 'type'
-              value = ('DataTypes.' + value).replace(/INT/, 'INTEGER').replace(/\s/, '.')
+              typeOutStr = ''
+              _.each types, (type) ->
+                if value.match(type.name)
+                  typeOutStr = 'DataTypes.' + type.value
+
+                  # 判断是否为int类型
+                  if type.value is 'INTEGER'
+                    length = value.match(/\(\d+\)/)
+                    typeOutStr += if length then length else ''
+
+                    if value.match('UNSIGNED')
+                      typeOutStr += '.UNSIGNED'
+              value = typeOutStr
 
             if type is 'coffee'
               text += "&&&#{attr}: #{value}\n"
