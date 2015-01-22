@@ -4,11 +4,6 @@ fs = require('fs')
 path = require('path')
 _ = require('lodash')
 
-templates = {
-  coffee:
-    text: 'module.exports = (sequelize, DataTypes) ->\n"<%= modelName %> = sequelize.define \'<%= modelName %>\',\n""<% _.forEach(fields, function(field, key) { %><%- key %>:\n<% _.forEach(field, function(value, key) { %><% if(!_.isNull(value)) { %>"""<%- key %>: <%- value %>\n<% } %><% }) %><% }) %>",\n""tableName: \'<%= tableName %>\''
-}
-
 module.exports = (() ->
 
   # models generate from db
@@ -49,25 +44,38 @@ module.exports = (() ->
             tableName: table
             modelName: table[0].toUpperCase() + table.substring(1)
             fields: results[1][table]
-          }, self.opts.outputFileType)
+          })
 
       deferred.promise
 
     # create file
     # @todo create js file
     # @params Object data model
-    # @params String type file type
-    generateTemps: (data = {}, type = 'coffee') ->
+    generateTemps: (data = {}) ->
+      type = @opts.outputFileType
+      
+      if @opts.space is 2
+        space = '  '
+      else
+        space = '    '
+
       if not /coffee|js/.test(type)
         return ''
 
       text = ''
 
-      text += "module.exports = (sequelize, DataTypes) ->\n&#{data.modelName} = sequelize.define \'#{data.modelName}\',\n&&"
-
+      if type is 'coffee'
+        text += "module.exports = (sequelize, DataTypes) ->\n&#{data.modelName} = sequelize.define \'#{data.modelName}\',\n"
+      else if type is 'js'
+        text += "module.exports = function(sequelize, DataTypes) {\n&return sequelize.define(\'#{data.modelName}\', {\n"
+  
       # 生成模型 &代表空格，默认两个
       _.each data.fields, (field, key) ->
-        text += "#{key}:\n"
+
+        if type is 'coffee'
+          text += "&&#{key}:\n"
+        else if type is 'js'
+          text += "&&#{key}: {\n"
 
         _.each field, (value, attr) ->
           if not _.isNull(value)
@@ -75,11 +83,20 @@ module.exports = (() ->
             if attr is 'type'
               value = ('DataTypes.' + value).replace(/INT/, 'INTEGER').replace(/\s/, '.')
 
-            text += "&&&#{attr}: #{value}\n"
+            if type is 'coffee'
+              text += "&&&#{attr}: #{value}\n"
+            else if type is 'js'
+              text += "&&&#{attr}: #{value},\n"
 
-      text += "&,\n&&tableName: \'#{data.tableName}\'"
+        if type is 'js'
+          text += '&&},\n'
 
-      fs.writeFile("#{@dir}/#{data.tableName}.#{type}", text.replace(/&/g, '  '))
+      if type is 'coffee'
+        text += "&,\n&&tableName: \'#{data.tableName}\'"
+      else if type is 'js'
+        text += "&}, {\n&&tableName: \'#{data.tableName}\'\n&});\n};"
+
+      fs.writeFile("#{@dir}/#{data.tableName}.#{type}", text.replace(/&/g, space))
 
   return ModelExport
 )()
