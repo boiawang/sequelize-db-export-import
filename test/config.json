@@ -1,0 +1,10 @@
+{
+  "user": "root",
+  "password": "",
+  "host": "127.0.0.1",
+  "database": "test",
+  "output": "./models",
+  "port": 3306,
+  "compile": "coffee",
+  "space": 2
+}

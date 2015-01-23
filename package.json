@@ -34,6 +34,7 @@
     "sequelize": "^2.0.0-rc8"
   },
   "devDependencies": {
+    "mocha": "^2.1.0",
     "mysql": "^2.5.4"
   }
 }
