@@ -1,3 +1,14 @@
+before_script:
+  - "mysql -e 'create database seq-ei-test;'"
+
+notifications:
+  email:
+    - zhengwang2314@gmail.com
+
+env:
+  - DB=mysql DIALECT=mysql
+
 language: node_js
+
 node_js:
   - "0.10"
