@@ -1,5 +1,7 @@
 # Sequelize-DB-Export-Import
 
+[![Build Status](https://travis-ci.org/boiawang/sequelize-db-export-import.svg)](https://travis-ci.org/boiawang/sequelize-db-export-import)
+
 Generate models files from db
 
 ## Install
