@@ -1,5 +1,5 @@
 before_script:
-  - "mysql -e 'create database seq-ei-test;'"
+  - "mysql -e 'create database seq_ei_test;'"
 
 notifications:
   email:
