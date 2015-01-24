@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var Link = require('../');
+var modelExport;
+var path = require('path');
+
+program
+  .version('0.0.1')
+  .usage('Create models by database')
+  .option('-r, --reverse', 'is generate model files or generate tables')
+  .option('-h, --host <n>', 'host ip default: 127.0.0.1')
+  .option('-u, --user <n>', 'host user default: root')
+  .option('-p, --password <n>', 'host password. default: ""')
+  .option('-d, --database <n>', 'database name')
+  .option('-o, --output <dir>', 'select models dir')
+  .option('-m, --dialect <n>', 'db type')
+  .option('-P, --port <n>', 'db port. default: 3306')
+  .option('-c, --config <file>', 'config file')
+  .option('-e, --compile <type>', 'model file type')
+  .option('-s, --space <n>', 'you can select 2 space or 4 space', parseInt)
+  .parse(process.argv);
+
+var options = {
+  host: program.host || '127.0.0.1',
+  dialect: program.dialect || 'mysql',
+  port: program.port || 3306,
+  database: program.database,
+  user: program.user || 'root',
+  password: program.password || '',
+  dir: program.output || path.resolve(process.cwd()) + '/models',
+  logging: false,
+  define: {
+    timestamps: true,
+    createdAt: 'create_time',
+    updatedAt: 'update_time'
+  }
+}
+
+if (program.reverse) {
+  modelImport = new Link.ModelImport(options);
+  modelExport.generateTables()
+} else {
+  options.space = program.space || 2;
+  options.outputFileType = program.compile || 'coffee'
+
+  modelExport = new Link.ModelExport(options);
+  modelExport.createModels()
+}
+

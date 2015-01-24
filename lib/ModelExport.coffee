@@ -39,20 +39,27 @@ module.exports = (() ->
       Q.all([createOutputDirPromise, describeAllTablesPromise])
       .then (results) ->
         tables = Object.keys(results[1])
+        generatePromises = []
 
-        tables.forEach (table) ->
-          self.generateTemps({
+        tables.forEach (table, index) ->
+          generatePromises.push self.generateTemps({
             tableName: table
             modelName: table[0].toUpperCase() + table.substring(1)
             fields: results[1][table]
           })
+
+        Q.all(generatePromises).then (results) ->
+          console.log('all models are generated from db')
+          process.exit(0)
 
       deferred.promise
 
     # create file
     # @todo create js file
     # @params Object data model
-    generateTemps: (data = {}) ->
+    generateTemps: (data = {}, callback) ->
+      deferred = Q.defer()
+
       type = @opts.outputFileType
       
       if @opts.space is 2
@@ -109,7 +116,15 @@ module.exports = (() ->
       else if type is 'js'
         text += "&}, {\n&&tableName: \'#{data.tableName}\'\n&});\n};"
 
-      fs.writeFile("#{@dir}/#{data.tableName}.#{type}", text.replace(/&/g, space))
+      fs.writeFile("#{@dir}/#{data.tableName}.#{type}", text.replace(/&/g, space), (err) ->
+        if err
+          console.log("create #{data.modelName} fail")
+        else
+          console.log("#{data.modelName} is created")
+        deferred.resolve(true)
+      )
+
+      deferred.promise
 
   return ModelExport
 )()

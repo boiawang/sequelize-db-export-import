@@ -4,7 +4,7 @@
   "description": "Generater models from mysql db or import tables from models files",
   "main": "index",
   "bin": {
-    "seq-ei": "./bin/www"
+    "seq-ei": "./bin/seq-ei"
   },
   "scripts": {
     "test": "make test"
