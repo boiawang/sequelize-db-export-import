@@ -6,9 +6,9 @@ var path = require('path');
 
 program
   .version('0.0.1')
-  .usage('Create models by database')
+  .usage('Create models by database or Create tables by models')
   .option('-r, --reverse', 'is generate model files or generate tables')
-  .option('-h, --host <n>', 'host ip default: 127.0.0.1')
+  .option('-H, --host <n>', 'host ip default: 127.0.0.1')
   .option('-u, --user <n>', 'host user default: root')
   .option('-p, --password <n>', 'host password. default: ""')
   .option('-d, --database <n>', 'database name')
