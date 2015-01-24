@@ -2,7 +2,6 @@
 
 var program = require('commander');
 var Link = require('../');
-var modelExport;
 var path = require('path');
 
 program

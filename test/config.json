@@ -1,10 +1,17 @@
 {
   "user": "root",
   "password": "",
+  "name": "seq-ei",
   "host": "127.0.0.1",
-  "database": "test",
-  "output": "./models",
+  "database": "seq-ei-test",
+  "output": "./test/models",
   "port": 3306,
   "compile": "coffee",
-  "space": 2
+  "logging": false,
+  "space": 2,
+  "define": {
+    "timestamps": true,
+    "createAt": "create_time",
+    "updateAt": "update_time"
+  }
 }
