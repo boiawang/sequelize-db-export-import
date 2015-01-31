@@ -3,7 +3,7 @@
   "password": "",
   "name": "seq-ei",
   "host": "127.0.0.1",
-  "database": "seq_ei_test",
+  "database": "seq-ei-test",
   "output": "./test/models",
   "port": 3306,
   "compile": "coffee",

@@ -1,6 +1,6 @@
 {
   "types": [{
-    "name": "VARCHAR",
+    "name": "CHAR",
     "value": "STRING"
   }, {
     "name": "STRING",
@@ -40,6 +40,9 @@
     "value": "DATE"
   }, {
     "name": "FLOAT",
+    "value": "FLOAT"
+  }, {
+    "name": "DOUBLE",
     "value": "FLOAT"
   }, {
     "name": "DECIMAL",

@@ -1,13 +1,14 @@
 {
   "name": "sequelize-db-export-import",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generater models from mysql db or import tables from models files",
   "main": "index",
   "bin": {
     "seq-ei": "./bin/seq-ei"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "test-cov": "make test-cov"
   },
   "keywords": [
     "node",
@@ -35,6 +36,7 @@
     "sequelize": "^2.0.0-rc8"
   },
   "devDependencies": {
+    "ibrik": "^2.0.0",
     "mocha": "^2.1.0",
     "mysql": "^2.5.4"
   }
