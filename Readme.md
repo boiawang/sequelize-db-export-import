@@ -1,6 +1,7 @@
 # Sequelize-DB-Export-Import
 
-[![Build Status](https://travis-ci.org/boiawang/sequelize-db-export-import.svg)](https://travis-ci.org/boiawang/sequelize-db-export-import)
+[![Build Status][travis-image]][travis-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
 Generate models files from db
 
@@ -47,3 +48,7 @@ seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -
 make test 或 npm run test
 ```
 
+[travis-image]: https://travis-ci.org/boiawang/sequelize-db-export-import.svg
+[travis-url]: https://travis-ci.org/boiawang/sequelize-db-export-import
+[coveralls-image]: https://img.shields.io/coveralls/boiawang/sequelize-db-export-import.svg?style=flat
+[coveralls-url]: https://coveralls.io/r/boiawang/sequelize-db-export-import?branch=master

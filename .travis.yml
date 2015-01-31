@@ -1,14 +1,11 @@
 before_script:
   - "mysql -e 'create database seq_ei_test;'"
-
 notifications:
   email:
     - zhengwang2314@gmail.com
-
 env:
   - DB=mysql DIALECT=mysql
-
 language: node_js
-
 node_js:
   - "0.10"
+after_script: "npm install coveralls@2.10.0 && cat ./coverage/lcov.info | coveralls"

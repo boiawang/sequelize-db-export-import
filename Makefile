@@ -10,6 +10,6 @@ test-cov:
 	./node_modules/.bin/ibrik cover ./node_modules/.bin/_mocha --report lcovonly -- -t 10000 $(TESTS);
 
 clean:
-	rm -fr ./test/models ./coverage
+	rm -fr ./test/models ./coverage ./models
 
 .PHONY: test clean
