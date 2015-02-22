@@ -11,7 +11,7 @@ test-cov:
 	make clean
 
 test-watch:
-	./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register $(TESTS)
+	./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register $(TESTS)
 	make clean
 
 clean:
