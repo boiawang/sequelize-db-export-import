@@ -3,7 +3,9 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Generate models files from db
+Generate models files from db or generate tables from models.
+
+Only mysql
 
 ## Install
 
@@ -47,6 +49,10 @@ seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -
 ```
 make test 或 npm run test
 ```
+
+## License
+
+The MIT License
 
 [travis-image]: https://travis-ci.org/boiawang/sequelize-db-export-import.svg
 [travis-url]: https://travis-ci.org/boiawang/sequelize-db-export-import

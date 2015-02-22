@@ -48,6 +48,8 @@ if (program.reverse) {
   options.outputFileType = program.compile || 'coffee'
 
   modelExport = new Link.ModelExport(options);
-  modelExport.createModels()
+  modelExport.createModels().then(function () {
+    process.exit(0)
+  });
 }
 

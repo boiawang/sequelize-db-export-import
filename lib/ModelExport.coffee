@@ -49,13 +49,13 @@ module.exports = (() ->
           })
 
         Q.all(generatePromises).then (results) ->
+          deferred.resolve(true)
           console.log('all models are generated from db')
-          process.exit(0)
+          # process.exit(0)
 
       deferred.promise
 
     # create file
-    # @todo create js file
     # @params Object data model
     generateTemps: (data = {}, callback) ->
       deferred = Q.defer()

@@ -36,6 +36,7 @@ module.exports = (() ->
       deferred.promise
 
     generateTables: () ->
+      deferred = Q.defer()
       self = @
 
       @getModelFiles().then (files) ->
@@ -49,5 +50,8 @@ module.exports = (() ->
 
           Q.all(promises).then (results) ->
             console.log('all tables are created')
-            process.exit(0)
+            deferred.resolve(true)
+            # process.exit(0)
+
+      deferred.promise
 )()

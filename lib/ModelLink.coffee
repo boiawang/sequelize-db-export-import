@@ -39,6 +39,7 @@ module.exports = (() ->
         promises = []
 
         tables.forEach (table) ->
+          console.log table
           promises.push(self.describeOneTable(table))
 
         Q.all(promises).then (allTables) ->
