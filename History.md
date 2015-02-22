@@ -1,3 +1,7 @@
+## 0.1.0 / 2015-02-22
+
+* Add unit test
+
 ## 0.0.3 / 2015-01-31
 
 * Fix double type cannot display
