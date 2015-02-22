@@ -1,7 +1,6 @@
 mocha = require('mocha')
 assert = require('assert')
 config = require('../config')
-# ModelImport = require('../../lib/ModelImport')
 ModelLink = require('../../lib/ModelLink')
 Link = require('../../lib')
 exec = require('child_process').exec

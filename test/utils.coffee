@@ -1,5 +1,4 @@
 Q = require('q')
-link = require('../')
 DataTypes = require('../node_modules/sequelize/lib/data-types')
 config = require('./config')
 Sequelize = require('sequelize')
