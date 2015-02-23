@@ -47,8 +47,19 @@ seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -
 ## Test
 
 ```
-make test 或 npm run test
+# test all
+make test
+
+# test coverage
+make test-cov
+
+# test watch
+make test-watch
 ```
+
+### Todo
+
+* postgres
 
 ## License
 

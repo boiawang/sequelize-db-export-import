@@ -12,7 +12,6 @@ test-cov:
 
 test-watch:
 	./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register $(TESTS)
-	make clean
 
 clean:
 	rm -fr ./test/models ./coverage ./models
