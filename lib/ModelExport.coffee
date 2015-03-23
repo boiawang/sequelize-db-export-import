@@ -38,6 +38,7 @@ module.exports = (() ->
 
       Q.all([createOutputDirPromise, describeAllTablesPromise])
       .then (results) ->
+
         tables = Object.keys(results[1])
         generatePromises = []
 
@@ -55,6 +56,7 @@ module.exports = (() ->
 
       deferred.promise
 
+    # @todo 将数据拼装写到一个方法中
     # create file
     # @params Object data model
     generateTemps: (data = {}, callback) ->
@@ -79,37 +81,73 @@ module.exports = (() ->
   
       # 生成模型 &代表空格，默认两个空格
       _.each data.fields, (field, key) ->
+        if field.Null is 'NO'
+          allowNull = false
+        else if field.Null is 'YES'
+          allowNull = true
+
+        if field.Extra is 'auto_increment'
+          autoIncrement = true
+        else
+          autoIncrement = false
+
+        if field.Key is 'PRI'
+          primaryKey = true
+        else
+          primaryKey = false
+
+        isLast = false
+        if key is data.fields.length - 1
+          isLast = true
+          lastString = ''
+        else
+          lastString = ','
+
+        typeOutStr = ''
+        _.each types, (type) ->
+          if field.Type.match(type.name)
+            typeOutStr = 'DataTypes.' + type.value
+
+            # 判断是否为int类型
+            if type.value is 'INTEGER'
+              length = field.Type.match(/\(\d+\)/)
+              typeOutStr += if length then length else ''
+
+              if field.Type.match('unsigned')
+                typeOutStr += '.UNSIGNED'
 
         if type is 'coffee'
-          text += "&&#{key}:\n"
+          text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n&&&defaultValue: #{field.Default}\n"
         else if type is 'js'
-          text += "&&#{key}: {\n"
+          text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey},\n&&&defaultValue: #{field.Default}\n&&}#{lastString}\n"
+        # else if type is 'js'
+        #   text += "&&#{field.Field}: {\n"
 
-        _.each field, (value, attr) ->
-          if not _.isNull(value)
+        # _.each field, (value, attr) ->
+        #   if not _.isNull(value)
 
-            if attr is 'type'
-              typeOutStr = ''
-              _.each types, (type) ->
-                if value.match(type.name)
-                  typeOutStr = 'DataTypes.' + type.value
+        #     if attr is 'type'
+        #       typeOutStr = ''
+        #       _.each types, (type) ->
+        #         if value.match(type.name)
+        #           typeOutStr = 'DataTypes.' + type.value
 
-                  # 判断是否为int类型
-                  if type.value is 'INTEGER'
-                    length = value.match(/\(\d+\)/)
-                    typeOutStr += if length then length else ''
+        #           # 判断是否为int类型
+        #           if type.value is 'INTEGER'
+        #             length = value.match(/\(\d+\)/)
+        #             typeOutStr += if length then length else ''
 
-                    if value.match('UNSIGNED')
-                      typeOutStr += '.UNSIGNED'
-              value = typeOutStr
+        #             if value.match('UNSIGNED')
+        #               typeOutStr += '.UNSIGNED'
+        #       value = typeOutStr
 
-            if type is 'coffee'
-              text += "&&&#{attr}: #{value}\n"
-            else if type is 'js'
-              text += "&&&#{attr}: #{value},\n"
+        #     if type is 'coffee'
+        #       text += "&&&#{attr}: #{value}\n"
+        #     else if type is 'js'
+        #       text += "&&&#{attr}: #{value},\n"
 
-        if type is 'js'
-          text += '&&},\n'
+        # if type is 'js'
+        #   text += '&&},\n'
 
       if type is 'coffee'
         text += "&,\n&&tableName: \'#{data.tableName}\'"

@@ -1,57 +1,57 @@
 {
   "types": [{
-    "name": "CHAR",
+    "name": "char",
     "value": "STRING"
   }, {
-    "name": "STRING",
+    "name": "string",
     "value": "STRING"
   }, {
-    "name": "VARYING",
+    "name": "varying",
     "value": "STRING"
   }, {
-    "name": "TEXT",
+    "name": "text",
     "value": "TEXT"
   }, {
-    "name": "INT",
+    "name": "int",
     "value": "INTEGER"
   }, {
-    "name": "SMALLINT",
+    "name": "smallint",
     "value": "INTEGER"
   }, {
-    "name": "MEDIUMINT",
+    "name": "mediumint",
     "value": "INTEGER"
   }, {
-    "name": "TINYINT",
+    "name": "tinyint",
     "value": "INTEGER"
   }, {
-    "name": "BIGINT",
+    "name": "bigint",
     "value": "BIGINT"
   }, {
-    "name": "TINYINT\\(1\\)",
+    "name": "tinyint\\(1\\)",
     "value": "BOOLEAN"
   }, {
-    "name": "BOOL",
+    "name": "bool",
     "value": "BOOLEAN"
   }, {
-    "name": "DATE",
+    "name": "date",
     "value": "DATE"
   }, {
-    "name": "TIME",
+    "name": "time",
     "value": "DATE"
   }, {
-    "name": "FLOAT",
+    "name": "float",
     "value": "FLOAT"
   }, {
-    "name": "DOUBLE",
+    "name": "double",
     "value": "FLOAT"
   }, {
-    "name": "DECIMAL",
+    "name": "decimal",
     "value": "DECIMAL"
   }, {
-    "name": "ENUM",
+    "name": "enum",
     "value": "ENUM"
   }, {
-    "name": "BLOB",
+    "name": "blob",
     "value": "BLOB"
   }] 
 }

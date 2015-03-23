@@ -18,15 +18,16 @@ module.exports = (() ->
     # describe one table
     describeOneTable: (table) ->
       oneTable = {}
-      @sequelize.query(@queryInterface.describeTableQuery(table), null, {
-        raw: true
+      @sequelize.query(@queryInterface.describeTableQuery(table), {
+        # raw: true
+        # plain: true
       }).then (fields) =>
-        if fields.id
-          fields.id.autoIncrement = true
-          fields.id.primaryKey = true
+        # if fields.id
+        #   fields.id.autoIncrement = true
+        #   fields.id.primaryKey = true
 
-        oneTable[table] = fields
-        @models[table] = fields
+        oneTable[table] = fields[0]
+        @models[table] = fields[0]
         
         return oneTable
 
@@ -39,7 +40,6 @@ module.exports = (() ->
         promises = []
 
         tables.forEach (table) ->
-          console.log table
           promises.push(self.describeOneTable(table))
 
         Q.all(promises).then (allTables) ->
