@@ -120,34 +120,6 @@ module.exports = (() ->
           text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n&&&defaultValue: #{field.Default}\n"
         else if type is 'js'
           text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey},\n&&&defaultValue: #{field.Default}\n&&}#{lastString}\n"
-        # else if type is 'js'
-        #   text += "&&#{field.Field}: {\n"
-
-        # _.each field, (value, attr) ->
-        #   if not _.isNull(value)
-
-        #     if attr is 'type'
-        #       typeOutStr = ''
-        #       _.each types, (type) ->
-        #         if value.match(type.name)
-        #           typeOutStr = 'DataTypes.' + type.value
-
-        #           # 判断是否为int类型
-        #           if type.value is 'INTEGER'
-        #             length = value.match(/\(\d+\)/)
-        #             typeOutStr += if length then length else ''
-
-        #             if value.match('UNSIGNED')
-        #               typeOutStr += '.UNSIGNED'
-        #       value = typeOutStr
-
-        #     if type is 'coffee'
-        #       text += "&&&#{attr}: #{value}\n"
-        #     else if type is 'js'
-        #       text += "&&&#{attr}: #{value},\n"
-
-        # if type is 'js'
-        #   text += '&&},\n'
 
       if type is 'coffee'
         text += "&,\n&&tableName: \'#{data.tableName}\'"

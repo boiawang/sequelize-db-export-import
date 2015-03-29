@@ -29,6 +29,7 @@ seq-ei Create models by database or Create tables by models
 -m, --dialect <n>     db type
 -P, --port <n>        db port. default: 3306
 -e, --compile <type>  model file type
+-c, --config <file>   config file
 -s, --space <n>       you can select 2 space or 4 space
 ```
 
@@ -38,10 +39,32 @@ seq-ei Create models by database or Create tables by models
 seq-ei -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
 ```
 
-## import tablse from model files
+### import tablse from model files
 
 ```
 seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
+```
+
+### also use config file
+
+config.json
+```
+{
+  "user": "root",
+  "password": "",
+  "host": "127.0.0.1",
+  "database": "test",
+  "dir": "./models",
+  "port": 3306,
+  "compile": "coffee",
+  "logging": false,
+  "space": 2,
+  "reverse": false
+}
+```
+
+```
+seq-ei -c config.json
 ```
 
 ## Test
@@ -60,6 +83,8 @@ make test-watch
 ### Todo
 
 * postgres
+* add cmd color
+* add table output
 
 ## License
 

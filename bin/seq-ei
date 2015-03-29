@@ -3,9 +3,11 @@
 var program = require('commander');
 var Link = require('../');
 var path = require('path');
+var fs = require('fs');
+var _ = require('lodash');
 
 program
-  .version('0.0.1')
+  .version('0.l.6')
   .usage('Create models by database or Create tables by models')
   .option('-r, --reverse', 'is generate model files or generate tables')
   .option('-H, --host <n>', 'host ip default: 127.0.0.1')
@@ -26,6 +28,7 @@ var options = {
   port: program.port || 3306,
   database: program.database,
   user: program.user || 'root',
+  reverse: program.reverse || false,
   password: program.password || '',
   dir: program.output || path.resolve(process.cwd()) + '/models',
   logging: false,
@@ -36,16 +39,21 @@ var options = {
   }
 }
 
-if (!program.database) {
+if (program.config) {
+  optionsData = require(path.resolve(process.cwd(), program.config));
+  options = _.extend(options, optionsData);
+}
+
+if (!options.database) {
   program.help()
 }
 
-if (program.reverse) {
+if (options.reverse) {
   modelImport = new Link.ModelImport(options);
   modelExport.generateTables()
 } else {
-  options.space = program.space || 2;
-  options.outputFileType = program.compile || 'coffee'
+  options.space = program.space || options.space || 2;
+  options.outputFileType = program.compile || options.compile || 'coffee';
 
   modelExport = new Link.ModelExport(options);
   modelExport.createModels().then(function () {

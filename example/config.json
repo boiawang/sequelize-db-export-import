@@ -1,0 +1,12 @@
+{
+  "user": "root",
+  "password": "",
+  "host": "127.0.0.1",
+  "database": "test",
+  "dir": "./models",
+  "port": 3306,
+  "compile": "coffee",
+  "logging": false,
+  "space": 2,
+  "reverse": false
+}

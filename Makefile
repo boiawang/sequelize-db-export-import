@@ -14,6 +14,6 @@ test-watch:
 	./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register $(TESTS)
 
 clean:
-	rm -fr ./test/models ./coverage ./models
+	rm -fr ./test/models ./models
 
 .PHONY: test clean

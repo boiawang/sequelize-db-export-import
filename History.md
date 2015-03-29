@@ -1,3 +1,8 @@
+## 0.1.6 / 2015-03-29
+
+* Add json file config
+* Add coverage info directory
+
 ## 0.1.5 / 2015-03-23
 
 * Fix generate models bug
