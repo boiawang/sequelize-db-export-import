@@ -8,7 +8,6 @@ test:
 test-cov:
 	@echo 'Testing and generating coverage report...'
 	./node_modules/.bin/ibrik cover ./node_modules/.bin/_mocha --report lcovonly -- -t 10000 $(TESTS);
-	make clean
 
 test-watch:
 	./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register $(TESTS)

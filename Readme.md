@@ -1,7 +1,6 @@
 # Sequelize-DB-Export-Import
 
 [![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
 
 Generate models files from db or generate tables from models.
 

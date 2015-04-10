@@ -50,7 +50,9 @@ if (!options.database) {
 
 if (options.reverse) {
   modelImport = new Link.ModelImport(options);
-  modelExport.generateTables()
+  modelImport.generateTables().then(function () {
+    process.exit(0)
+  });
 } else {
   options.space = program.space || options.space || 2;
   options.outputFileType = program.compile || options.compile || 'coffee';
