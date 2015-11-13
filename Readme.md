@@ -38,7 +38,7 @@ seq-ei Create models by database or Create tables by models
 seq-ei -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
 ```
 
-### import tablse from model files
+### import tables from model files
 
 ```
 seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
