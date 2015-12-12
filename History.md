@@ -1,3 +1,7 @@
+## 0.1.8 / 2015-12-12
+
+* Fix bit mapping of mysql types
+
 ## 0.1.7 / 2015-04-10
 
 * Fix import table bug
