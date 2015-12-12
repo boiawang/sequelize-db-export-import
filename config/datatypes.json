@@ -53,5 +53,8 @@
   }, {
     "name": "blob",
     "value": "BLOB"
+  }, {
+    "name": "bit",
+    "value": "BOOLEAN"
   }] 
 }

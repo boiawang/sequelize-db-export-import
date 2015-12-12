@@ -34,7 +34,7 @@
     "del": "^1.1.1",
     "lodash": "^2.4.1",
     "q": "^1.1.2",
-    "sequelize": "^2.0.0-rc8"
+    "sequelize": "2.0.0-rc8"
   },
   "devDependencies": {
     "ibrik": "^2.0.0",
