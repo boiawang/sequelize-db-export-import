@@ -5,6 +5,7 @@ var Link = require('../');
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
+var colors = require('colors');
 
 program
   .version('0.l.6')
@@ -37,6 +38,11 @@ var options = {
     createdAt: 'create_time',
     updatedAt: 'update_time'
   }
+}
+
+if (!options.database) {
+  console.log(colors.red('database name(-d) is needed'));
+  process.exit(0);
 }
 
 if (program.config) {

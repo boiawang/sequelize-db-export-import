@@ -4,6 +4,10 @@ fs = require('fs')
 path = require('path')
 _ = require('lodash')
 types = require('../config/datatypes').types
+colors = require('colors')
+ProgressBar = require('progress')
+
+bar = null
 
 module.exports = (() ->
 
@@ -40,6 +44,12 @@ module.exports = (() ->
       .then (results) ->
 
         tables = Object.keys(results[1])
+        bar = new ProgressBar('[:bar] :percent :msg', {
+          total: tables.length
+          complete: '='
+          incomplete: ' '
+        })
+
         generatePromises = []
 
         tables.forEach (table, index) ->
@@ -51,7 +61,7 @@ module.exports = (() ->
 
         Q.all(generatePromises).then (results) ->
           deferred.resolve(true)
-          console.log('all models are generated from db')
+          console.log(colors.rainbow('all models are generated from db'))
           # process.exit(0)
 
       deferred.promise
@@ -130,7 +140,10 @@ module.exports = (() ->
         if err
           console.log("create #{data.modelName} fail")
         else
-          console.log("#{data.modelName} is created")
+          bar.tick({
+            msg: " #{data.modelName} is created"
+          })
+          console.log('')
         deferred.resolve(true)
       )
 
