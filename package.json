@@ -1,6 +1,6 @@
 {
   "name": "sequelize-db-export-import",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Generater models from mysql db or import tables from models files",
   "main": "index",
   "bin": {
