@@ -6,6 +6,12 @@ Generate models files from db or generate tables from models.
 
 Only mysql
 
+![cmd](https://raw.githubusercontent.com/boiawang/sequelize-db-export-import/master/assets/resource-1.png)
+
+<br />
+
+![preview](https://raw.githubusercontent.com/boiawang/sequelize-db-export-import/master/assets/resource-2.png)
+
 ## Install
 
 ```
@@ -32,19 +38,19 @@ seq-ei Create models by database or Create tables by models
 -s, --space <n>       you can select 2 space or 4 space
 ```
 
-### export models from db
+### Export models from db
 
 ```
 seq-ei -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
 ```
 
-### import tables from model files
+### Import tables from model files
 
 ```
 seq-ei -r -H 192.168.1.220 -u root -p 123 -d test -o ./models -m mysql -P 3306 -e coffee -s 2
 ```
 
-### also use config file
+### Also use config file
 
 config.json
 ```
