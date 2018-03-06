@@ -8,5 +8,6 @@
   "compile": "coffee",
   "logging": false,
   "space": 2,
-  "reverse": false
+  "reverse": false,
+  "exportDefaultValue": false
 }
