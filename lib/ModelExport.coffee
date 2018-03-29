@@ -73,7 +73,11 @@ module.exports = (() ->
       deferred = Q.defer()
 
       type = @opts.outputFileType
-      
+      if @opts.exportDefaultValue is false
+        exportDefaultValue = false
+      else 
+        exportDefaultValue = true
+
       if @opts.space is 2
         space = '  '
       else
@@ -127,9 +131,15 @@ module.exports = (() ->
                 typeOutStr += '.UNSIGNED'
 
         if type is 'coffee'
-          text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n&&&defaultValue: #{field.Default}\n"
+          if exportDefaultValue is true
+            text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n&&&defaultValue: #{field.Default}\n"
+          else
+            text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n"
         else if type is 'js'
-          text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey},\n&&&defaultValue: #{field.Default}\n&&}#{lastString}\n"
+          if exportDefaultValue is true
+            text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey},\n&&&defaultValue: #{field.Default}\n&&}#{lastString}\n"
+          else
+            text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey}\n&&}#{lastString}\n"
 
       if type is 'coffee'
         text += "&,\n&&tableName: \'#{data.tableName}\'"

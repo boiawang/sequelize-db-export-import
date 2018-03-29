@@ -36,6 +36,7 @@ seq-ei Create models by database or Create tables by models
 -e, --compile <type>  model file type
 -c, --config <file>   config file
 -s, --space <n>       you can select 2 space or 4 space
+--no-default-value    exclude default data values
 ```
 
 ### Export models from db
