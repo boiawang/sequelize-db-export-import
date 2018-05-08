@@ -91,7 +91,7 @@ module.exports = (() ->
       if type is 'coffee'
         text += "module.exports = up: (queryInterface, Sequelize) ->\n&#{data.modelName} = return queryInterface.createTable \'#{data.tableName}\',\n"
       else if type is 'js'
-        text += "module.exports = {\n up: (queryInterface, Sequelize) => {\n&return queryInterface.createTable(\'#{data.tableName}\', {\n"
+        text += "module.exports = {\n up: (queryInterface, Sequelize) => {\n&&return queryInterface.createTable(\'#{data.tableName}\', {\n"
 
       # generate definition
       _.each data.fields, (field, key) ->
@@ -132,19 +132,21 @@ module.exports = (() ->
 
         if type is 'coffee'
           if (exportDefaultValue is true) && (field.Default != null)
-            text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n&&&defaultValue: #{field.Default}\n"
+            text += "&&&&#{field.Field}:\n&&&&&type: #{typeOutStr}\n&&&&&allowNull: #{allowNull}\n&&&&&autoIncrement: #{autoIncrement}\n&&&&&primaryKey: #{primaryKey}\n&&&&&defaultValue: #{field.Default}\n"
           else
-            text += "&&#{field.Field}:\n&&&type: #{typeOutStr}\n&&&allowNull: #{allowNull}\n&&&autoIncrement: #{autoIncrement}\n&&&primaryKey: #{primaryKey}\n"
+            text += "&&&&#{field.Field}:\n&&&&&type: #{typeOutStr}\n&&&&&allowNull: #{allowNull}\n&&&&&autoIncrement: #{autoIncrement}\n&&&&&primaryKey: #{primaryKey}\n"
         else if type is 'js'
           if (exportDefaultValue is true) && (field.Default != null)
-            text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey},\n&&&defaultValue: '#{field.Default}'\n&&}#{lastString}\n"
+            text += "&&&&#{field.Field}: {\n&&&&&type: #{typeOutStr},\n&&&&&allowNull: #{allowNull},\n&&&&&autoIncrement: #{autoIncrement},\n&&&&&primaryKey: #{primaryKey},\n&&&&&defaultValue: '#{field.Default}'\n&&&&}#{lastString}\n"
           else
-            text += "&&#{field.Field}: {\n&&&type: #{typeOutStr},\n&&&allowNull: #{allowNull},\n&&&autoIncrement: #{autoIncrement},\n&&&primaryKey: #{primaryKey}\n&&}#{lastString}\n"
+            text += "&&&&#{field.Field}: {\n&&&&&type: #{typeOutStr},\n&&&&&allowNull: #{allowNull},\n&&&&&autoIncrement: #{autoIncrement},\n&&&&&primaryKey: #{primaryKey}\n&&&&}#{lastString}\n"
 
       if type is 'coffee'
-        text += "&'"
+        text += "&&'"
       else if type is 'js'
-        text += "&});\n}\n};"
+        text += "&&});\n  }, "
+        text += "down: (queryInterface, Sequelize) => {\n&&return queryInterface.dropTable('" + data.tableName + "');\n&}"
+        text += "\n};"
 
       fs.writeFile("#{@dir}/create-#{data.tableName}.#{type}", text.replace(/&/g, space), (err) ->
         if err

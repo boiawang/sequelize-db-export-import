@@ -58,7 +58,6 @@ if (!options.database) {
   program.help()
 }
 
-console.log(options);
 if (options.reverse) {
   modelImport = new Link.ModelImport(options);
   modelImport.generateTables().then(function () {
