@@ -13,7 +13,11 @@ module.exports = (() ->
     # show all tables
     showAllTables: () ->
       @sequelize.showAllSchemas().then (tables) =>
-        return _.map(tables, "Tables_in_#{@opts.database}")
+        if @opts.dialect == 'sqlite'
+          _tables = tables
+        else
+          _tables = _.map(tables, "Tables_in_#{@opts.database}")
+        return _tables
 
     # describe one table
     describeOneTable: (table) ->
@@ -26,8 +30,24 @@ module.exports = (() ->
         #   fields.id.autoIncrement = true
         #   fields.id.primaryKey = true
 
-        oneTable[table] = fields[0]
-        @models[table] = fields[0]
+        if @opts.dialect == 'sqlite'
+          columnInfoList = []
+          columnInfo = {}
+          for key, field of fields
+            columnInfo = {
+              Field: key,
+              Type: field.type.toLowerCase(),
+              Null: if field.allowNull then 'YES' else 'NO',
+              Default: if field.defaultvalue == undefined then null else field.defaultValue,
+              Key: field.primayKey
+            }
+            columnInfoList.push(columnInfo)
+
+          oneTable[table] = columnInfoList
+          @models[table] = columnInfoList
+        else
+          oneTable[table] = fields[0]
+          @models[table] = fields[0]
 
         return oneTable
 
