@@ -10,10 +10,10 @@ module.exports = (() ->
       @queryInterface = sequelize.getQueryInterface().QueryGenerator
       @models = {}
 
-    # show all tabls
+    # show all tables
     showAllTables: () ->
       @sequelize.showAllSchemas().then (tables) =>
-        return _.pluck(tables, "Tables_in_#{@opts.database}")
+        return _.map(tables, "Tables_in_#{@opts.database}")
 
     # describe one table
     describeOneTable: (table) ->
@@ -28,7 +28,7 @@ module.exports = (() ->
 
         oneTable[table] = fields[0]
         @models[table] = fields[0]
-        
+
         return oneTable
 
     # describe all tables
@@ -46,5 +46,5 @@ module.exports = (() ->
           deferred.resolve(self.models)
 
       deferred.promise
-          
+
 )()

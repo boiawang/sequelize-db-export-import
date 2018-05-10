@@ -33,14 +33,14 @@
     "colors": "^1.1.2",
     "commander": "^2.6.0",
     "del": "^1.1.1",
-    "lodash": "^2.4.1",
+    "fileset": "^2.0.3",
+    "lodash": "^4.17.10",
     "progress": "^1.1.8",
     "q": "^1.1.2",
-    "sequelize": "2.0.5"
+    "sequelize": "^3.30.4"
   },
   "devDependencies": {
-    "ibrik": "^2.0.0",
-    "mocha": "^2.1.0",
+    "mocha": "^5.1.1",
     "mysql": "^2.5.4"
   }
 }
