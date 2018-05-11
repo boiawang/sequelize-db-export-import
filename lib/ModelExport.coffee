@@ -6,6 +6,7 @@ _ = require('lodash')
 types = require('../config/datatypes').types
 colors = require('colors')
 ProgressBar = require('progress')
+camel = require('to-camel-case');
 
 bar = null
 
@@ -15,7 +16,7 @@ module.exports = (() ->
   class ModelExport extends ModelLink
     constructor: (options) ->
       super options
-
+      @camel = options.camel
       @dir = options.dir
 
     # create models dir
@@ -53,9 +54,9 @@ module.exports = (() ->
         generatePromises = []
 
         tables.forEach (table, index) ->
-          generatePromises.push self.generateTemps({
+          return generatePromises.push self.generateTemps({
             tableName: table
-            modelName: table[0].toUpperCase() + table.substring(1)
+            modelName: if @camel then camel(table) else table[0].toUpperCase() + table.substring(1)
             fields: results[1][table]
           })
 
@@ -146,12 +147,14 @@ module.exports = (() ->
       else if type is 'js'
         text += "&}, {\n&&tableName: \'#{data.tableName}\'\n&});\n};"
 
-      fs.writeFile("#{@dir}/#{data.tableName}.#{type}", text.replace(/&/g, space), (err) ->
+      fileName = if @camel then camel(data.tableName) else data.tableName
+
+      fs.writeFile("#{@dir}/#{fileName}.#{type}", text.replace(/&/g, space), (err) ->
         if err
-          console.log("create #{data.modelName} fail")
+          console.log("create #{fileName} fail")
         else
           bar.tick({
-            msg: " #{data.modelName} is created"
+            msg: " #{fileName} is created"
           })
           console.log('')
         deferred.resolve(true)

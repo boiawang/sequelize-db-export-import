@@ -19,6 +19,7 @@ program
   .option('-m, --dialect <n>', 'db type')
   .option('-P, --port <n>', 'db port. default: 3306')
   .option('-c, --config <file>', 'config file')
+  .option('-C, --camel', 'convert tableName and file to camelCase')
   .option('-e, --compile <type>', 'model file type')
   .option('-s, --space <n>', 'you can select 2 space or 4 space', parseInt)
   .option('--no-default-value', 'exclude default data values')
@@ -39,7 +40,8 @@ var options = {
     createdAt: 'create_time',
     updatedAt: 'update_time'
   },
-  exportDefaultValue: program.defaultValue
+  exportDefaultValue: program.defaultValue,
+  camel: program.camel || false
 }
 
 if (program.config) {
