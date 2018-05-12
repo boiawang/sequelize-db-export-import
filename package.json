@@ -37,11 +37,11 @@
     "lodash": "^4.17.10",
     "progress": "^1.1.8",
     "q": "^1.1.2",
-    "sequelize": "^3.30.4",
-    "sqlite3": "^4.0.0"
+    "sequelize": "^3.30.4"
   },
   "devDependencies": {
     "mocha": "^5.1.1",
-    "mysql": "^2.5.4"
+    "mysql": "^2.5.4",
+    "sqlite3": "^3.1.13"
   }
 }
