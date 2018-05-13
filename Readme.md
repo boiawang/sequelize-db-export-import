@@ -35,6 +35,7 @@ seq-ei Create models by database or Create tables by models
 -P, --port <n>        db port. default: 3306
 -e, --compile <type>  model file type
 -c, --config <file>   config file
+-C, --camel           convert tableName and file to camelCase
 -s, --space <n>       you can select 2 space or 4 space
 --no-default-value    exclude default data values
 ```
