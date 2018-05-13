@@ -37,7 +37,8 @@
     "lodash": "^4.17.10",
     "progress": "^1.1.8",
     "q": "^1.1.2",
-    "sequelize": "^3.30.4"
+    "sequelize": "2.0.5",
+    "to-camel-case": "^1.0.0"
   },
   "devDependencies": {
     "ibrik": "^2.0.0",
