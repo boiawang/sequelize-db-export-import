@@ -129,6 +129,12 @@ module.exports = (() ->
 
               if field.Type.match('unsigned')
                 typeOutStr += '.UNSIGNED'
+            else if type.value is 'DECIMAL'
+              length = field.Type.match(/\(\d+,\d+\)/)
+              typeOutStr += if length then length else ''
+            else if type.value is 'ENUM'
+              length = field.Type.match(/\(.*\)/)
+              typeOutStr += if length then length else ''
 
         if type is 'coffee'
           if (exportDefaultValue is true) && (field.Default != null)
