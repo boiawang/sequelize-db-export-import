@@ -1,6 +1,6 @@
 {
   "name": "sequelize-db-export-import",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "Generater models from mysql db or import tables from models files",
   "main": "index",
   "bin": {
@@ -34,6 +34,7 @@
     "commander": "^2.6.0",
     "del": "^1.1.1",
     "lodash": "^2.4.1",
+    "owner": "^0.1.0",
     "progress": "^1.1.8",
     "q": "^1.1.2",
     "sequelize": "2.0.5",
