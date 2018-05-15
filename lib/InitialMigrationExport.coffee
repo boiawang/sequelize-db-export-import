@@ -143,7 +143,7 @@ module.exports = (() ->
             text += "&&&&#{field.Field}:\n&&&&&type: #{typeOutStr}\n&&&&&allowNull: #{allowNull}\n&&&&&autoIncrement: #{autoIncrement}\n&&&&&primaryKey: #{primaryKey}\n"
         else if type is 'js'
           if (exportDefaultValue is true) && (field.Default != null)
-            text += "&&&&#{field.Field}: {\n&&&&&type: #{typeOutStr},\n&&&&&allowNull: #{allowNull},\n&&&&&autoIncrement: #{autoIncrement},\n&&&&&primaryKey: #{primaryKey},\n&&&&&defaultValue: '#{field.Default}'\n&&&&}#{lastString}\n"
+            text += "&&&&#{field.Field}: {\n&&&&&type: #{typeOutStr},\n&&&&&allowNull: #{allowNull},\n&&&&&autoIncrement: #{autoIncrement},\n&&&&&primaryKey: #{primaryKey},\n&&&&&defaultValue: #{field.Default}\n&&&&}#{lastString}\n"
           else
             text += "&&&&#{field.Field}: {\n&&&&&type: #{typeOutStr},\n&&&&&allowNull: #{allowNull},\n&&&&&autoIncrement: #{autoIncrement},\n&&&&&primaryKey: #{primaryKey}\n&&&&}#{lastString}\n"
 

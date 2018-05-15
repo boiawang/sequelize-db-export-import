@@ -34,11 +34,15 @@ module.exports = (() ->
           columnInfoList = []
           columnInfo = {}
           for key, field of fields
+            if field.defaultValue == undefined or field.defaultValue == null
+              defaultValue = null
+            else
+              if field.type == 'TINYINT(1)' then defaultValue = field.defaultValue else defaultValue = "'" + field.defaultValue + "'"
             columnInfo = {
               Field: key,
               Type: field.type.toLowerCase(),
               Null: if field.allowNull then 'YES' else 'NO',
-              Default: if field.defaultvalue == undefined then null else field.defaultValue,
+              Default: defaultValue,
               Key: field.primayKey
             }
             columnInfoList.push(columnInfo)
