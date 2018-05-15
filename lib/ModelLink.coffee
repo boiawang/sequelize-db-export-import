@@ -43,7 +43,7 @@ module.exports = (() ->
               Type: field.type.toLowerCase(),
               Null: if field.allowNull then 'YES' else 'NO',
               Default: defaultValue,
-              Key: field.primayKey
+              Key: if field.primaryKey == true then 'PRI' else null
             }
             columnInfoList.push(columnInfo)
 
